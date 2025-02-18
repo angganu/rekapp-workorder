@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-// use App\Http\Controllers\API\BlogController;
+
+// Data Master
+use App\Http\Controllers\Masters\CompaniesController;
+// End Data Master
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('register', 'register')->name('register');
@@ -17,18 +20,13 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group( function () {
-    // Route::apiResource('blogs', BlogController::class);
+    
     Route::get('user', function (Request $request) {
         return $request->user();
     })->name('user');
 
-    // Route::prefix('wo')->group(function () {
-    //     Route::post("fire", [FirebaseController::class,'fire']);
-    //     Route::post("push", [RecapController::class,'pushValue']);
-    //     Route::post("syncHourly", [SyncronizeController::class,'syncHourly']);
-    //     Route::post("syncDaily", [SyncronizeController::class,'syncDaily']);
-    //     Route::post("syncMonthly", [SyncronizeController::class,'syncMonthly']);
-    //     Route::post("syncYearly", [SyncronizeController::class,'syncYearly']);
-    // });
-
+    Route::prefix('masters')->group(function () {
+        Route::apiResource('companies', CompaniesController::class);
+        
+    });
 });
