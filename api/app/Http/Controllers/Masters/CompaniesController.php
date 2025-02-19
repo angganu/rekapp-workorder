@@ -62,7 +62,7 @@ class CompaniesController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'code' => 'required',
+            // 'code' => 'required',
             'name' => 'required',
             'legal_name' => 'required',
             'alias' => 'required',
