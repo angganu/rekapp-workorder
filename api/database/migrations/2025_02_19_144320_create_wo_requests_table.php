@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('asset_id');
-            $table->unsignedBigInteger('location_id');
 
             $table->string('code', 100)->unique();
             $table->string('name');
