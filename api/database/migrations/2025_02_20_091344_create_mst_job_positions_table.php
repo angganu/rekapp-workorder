@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wo_logs', function (Blueprint $table) {
+        Schema::create('mst_job_positions', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->unsignedBigInteger('wo_planning_id');
-            $table->unsignedBigInteger('employee_id');
-            $table->text('note')->nullable();
+            $table->string('code', 100)->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wo_logs');
+        Schema::dropIfExists('mst_job_positions');
     }
 };
