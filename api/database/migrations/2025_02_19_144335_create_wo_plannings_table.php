@@ -22,8 +22,9 @@ return new class extends Migration
             $table->text('note')->comment('dari leader ke teknisi')->nullable();
 
             $table->unsignedBigInteger('employee_id')->nullable(); 
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('finish_at')->nullable();
+            $table->date('date')->nullable();
+            $table->time('start_at')->nullable();
+            $table->time('finish_at')->nullable();
             $table->unsignedInteger('duration')->comment('in minutes')->nullable();
             $table->unsignedInteger('point')->comment('point dari aktivitas')->nullable();           
 

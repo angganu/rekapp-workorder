@@ -16,8 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('wo_planning_id')->comment('Dari planning yg mana')->nullable(); 
 
             $table->unsignedBigInteger('employee_id')->nullable(); 
-            $table->dateTime('start_at')->nullable();
-            $table->dateTime('finish_at')->nullable();
+            $table->date('date')->nullable();
+            $table->time('start_at')->nullable();
+            $table->time('finish_at')->nullable();
             $table->unsignedInteger('duration')->comment('in minutes')->nullable(); 
             $table->unsignedInteger('point')->comment('point dari aktivitas')->nullable();  
             $table->unsignedInteger('score')->comment('dari rumusan: (durasi planning / durasi realisasi) * point')->nullable();    
