@@ -8,12 +8,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\MstCompanies as Model;
-use App\Http\Resources\CompanyResource as ModelResource;
+use App\Models\MstAreas as Model;
+use App\Http\Resources\AreaResource as ModelResource;
 
-class CompaniesController extends BaseController
+class AreasController extends BaseController
 {
-    private $module = 'Company';
+    private $module = 'Area';
 
     // Display a listing of the resource.
     public function index(): JsonResponse
@@ -29,10 +29,10 @@ class CompaniesController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
+            'location_id' => 'required',
             'code' => 'required',
-            'name' => 'required',
-            'legal_name' => 'required',
-            'alias' => 'required',
+            'type' => 'required',
+            'name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -62,10 +62,10 @@ class CompaniesController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
+            'location_id' => 'required',
             // 'code' => 'required',
-            'name' => 'required',
-            'legal_name' => 'required',
-            'alias' => 'required',
+            'type' => 'required',
+            'name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -73,10 +73,10 @@ class CompaniesController extends BaseController
         }
 
         $model = Model::findOrFail($id);
+        $model->location_id = $input['location_id'];
         $model->code = $input['code'];
+        $model->type = $input['type'];
         $model->name = $input['name'];
-        $model->legal_name = $input['legal_name'];
-        $model->alias = $input['alias'];
         $model->description = $input['description'];
         $model->save();
 

@@ -8,12 +8,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\MstCompanies as Model;
-use App\Http\Resources\CompanyResource as ModelResource;
+use App\Models\MstRoomCategories as Model;
+use App\Http\Resources\RoomCategoryResource as ModelResource;
 
-class CompaniesController extends BaseController
+class RoomCategoriesController extends BaseController
 {
-    private $module = 'Company';
+    private $module = 'Room Category';
 
     // Display a listing of the resource.
     public function index(): JsonResponse
@@ -30,9 +30,7 @@ class CompaniesController extends BaseController
 
         $validator = Validator::make($input, [
             'code' => 'required',
-            'name' => 'required',
-            'legal_name' => 'required',
-            'alias' => 'required',
+            'name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -63,9 +61,7 @@ class CompaniesController extends BaseController
 
         $validator = Validator::make($input, [
             // 'code' => 'required',
-            'name' => 'required',
-            'legal_name' => 'required',
-            'alias' => 'required',
+            'name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -75,8 +71,6 @@ class CompaniesController extends BaseController
         $model = Model::findOrFail($id);
         $model->code = $input['code'];
         $model->name = $input['name'];
-        $model->legal_name = $input['legal_name'];
-        $model->alias = $input['alias'];
         $model->description = $input['description'];
         $model->save();
 
