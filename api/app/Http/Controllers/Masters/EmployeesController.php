@@ -29,11 +29,13 @@ class EmployeesController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'location_id' => 'required',
-            'area_id' => 'required',
-            'room_category_id' => 'required',
-            'code' => 'required',
-            'name' => 'required'
+            'nik' => 'required',
+            'name' => 'required',
+            // 'gender' => 'required',
+            // 'phone' => 'required',
+            // 'email' => 'required',
+            // 'address' => 'required',
+            'date_active' => 'required'
         ]);
 
         if($validator->fails()){
@@ -63,11 +65,13 @@ class EmployeesController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'location_id' => 'required',
-            'area_id' => 'required',
-            'room_category_id' => 'required',
-            // 'code' => 'required',
-            'name' => 'required'
+            'nik' => 'required',
+            'name' => 'required',
+            // 'gender' => 'required',
+            // 'phone' => 'required',
+            // 'email' => 'required',
+            // 'address' => 'required',
+            'date_active' => 'required'
         ]);
 
         if($validator->fails()){
@@ -75,12 +79,15 @@ class EmployeesController extends BaseController
         }
 
         $model = Model::findOrFail($id);
-        $model->location_id = $input['location_id'];
-        $model->area_id = $input['area_id'];
-        $model->room_category_id = $input['room_category_id'];
-        $model->code = $input['code'];
+        $model->nik = $input['nik'];
         $model->name = $input['name'];
-        $model->description = $input['description'];
+        $model->gender = $input['gender'];
+        $model->phone = $input['phone'];
+        $model->email = $input['email'];
+        $model->address = $input['address'];
+        $model->date_active = $input['date_active'];
+        $model->date_disabled = $input['date_disabled'];
+        $model->is_active = $input['is_active'];
         $model->save();
 
         return $this->sendResponse(new ModelResource($model), $this->module. ' updated successfully.');

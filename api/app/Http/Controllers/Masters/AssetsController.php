@@ -30,8 +30,11 @@ class AssetsController extends BaseController
 
         $validator = Validator::make($input, [
             'location_id' => 'required',
+            'asset_category_id' => 'required',
+            'company_id' => 'required',
+            'location_id' => 'required',
             'area_id' => 'required',
-            'room_category_id' => 'required',
+            'room_id' => 'required',
             'code' => 'required',
             'name' => 'required'
         ]);
@@ -64,8 +67,11 @@ class AssetsController extends BaseController
 
         $validator = Validator::make($input, [
             'location_id' => 'required',
+            'asset_category_id' => 'required',
+            'company_id' => 'required',
+            'location_id' => 'required',
             'area_id' => 'required',
-            'room_category_id' => 'required',
+            'room_id' => 'required',
             // 'code' => 'required',
             'name' => 'required'
         ]);
@@ -75,12 +81,16 @@ class AssetsController extends BaseController
         }
 
         $model = Model::findOrFail($id);
+        $model->asset_category_id = $input['asset_category_id'];
+        $model->company_id = $input['company_id'];
         $model->location_id = $input['location_id'];
         $model->area_id = $input['area_id'];
-        $model->room_category_id = $input['room_category_id'];
+        $model->room_id = $input['room_id'];
         $model->code = $input['code'];
         $model->name = $input['name'];
         $model->description = $input['description'];
+        // $model->last_maintenance = $input['last_maintenance'];
+        // $model->next_maintenance = $input['next_maintenance'];
         $model->save();
 
         return $this->sendResponse(new ModelResource($model), $this->module. ' updated successfully.');

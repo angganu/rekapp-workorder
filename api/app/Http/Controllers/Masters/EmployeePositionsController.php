@@ -29,11 +29,10 @@ class EmployeePositionsController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
+            'employee_id' => 'required',
+            'company_id' => 'required',
             'location_id' => 'required',
-            'area_id' => 'required',
-            'room_category_id' => 'required',
-            'code' => 'required',
-            'name' => 'required'
+            'position_id' => 'required',
         ]);
 
         if($validator->fails()){
@@ -63,11 +62,10 @@ class EmployeePositionsController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
+            'employee_id' => 'required',
+            'company_id' => 'required',
             'location_id' => 'required',
-            'area_id' => 'required',
-            'room_category_id' => 'required',
-            // 'code' => 'required',
-            'name' => 'required'
+            'position_id' => 'required',
         ]);
 
         if($validator->fails()){
@@ -75,12 +73,10 @@ class EmployeePositionsController extends BaseController
         }
 
         $model = Model::findOrFail($id);
+        $model->employee_id = $input['employee_id'];
+        $model->company_id = $input['company_id'];
         $model->location_id = $input['location_id'];
-        $model->area_id = $input['area_id'];
-        $model->room_category_id = $input['room_category_id'];
-        $model->code = $input['code'];
-        $model->name = $input['name'];
-        $model->description = $input['description'];
+        $model->position_id = $input['position_id'];
         $model->save();
 
         return $this->sendResponse(new ModelResource($model), $this->module. ' updated successfully.');
