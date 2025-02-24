@@ -2,14 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\Masters\ActivityController;
+use App\Http\Controllers\Auth\AuthController;
 // Data Master
 use App\Http\Controllers\Masters\CompaniesController;
 use App\Http\Controllers\Masters\LocationsController;
 use App\Http\Controllers\Masters\AreasController;
 use App\Http\Controllers\Masters\AssetCategoriesController;
 use App\Http\Controllers\Masters\AssetsController;
+use App\Http\Controllers\Masters\ActivitiesController;
 use App\Http\Controllers\Masters\EmployeePositionsController;
 use App\Http\Controllers\Masters\EmployeesController;
 use App\Http\Controllers\Masters\JobPositionsController;
@@ -59,7 +59,7 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::apiResource('employees', EmployeesController::class);
         Route::apiResource('employee-positions', EmployeePositionsController::class);
 
-        Route::apiResource('activities', ActivityController::class);
+        Route::apiResource('activities', ActivitiesController::class);
         Route::apiResource('rating-parameters', RatingParametersController::class);
         
     });

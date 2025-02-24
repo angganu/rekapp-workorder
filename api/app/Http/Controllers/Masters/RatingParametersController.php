@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Masters;
 
-use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\Base\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +18,31 @@ class RatingParametersController extends BaseController
     // Display a listing of the resource.
     public function index(): JsonResponse
     {
-        $data = Model::all();
+        $data = Model::orderBy(
+            ((request()->order_column)? request()->order_column:'id'),
+            ((request()->order_direction)? request()->order_direction : 'DESC')
+        );
+
+        $data = $this->filterData($data);
+        $data = $data->get();        
 
         return $this->sendResponse(ModelResource::collection($data), $this->module. ' retrieved successfully.');
+    }
+
+    public function filterData($data){
+        if(request()->filter_keyword){
+            $data = $data->where(function($query){
+                $query->where('code','like','%'.request()->filter_keyword.'%')
+                    ->orWhere('name','like','%'.request()->filter_keyword.'%')
+                    ->orWhere('description','like','%'.request()->filter_keyword.'%');
+            });
+        }
+        
+        if(request()->filter_date){
+            $data = $data->whereBetween('created_at',request()->filter_date);
+        }
+
+        return $data;
     }
 
     // Store a newly created resource in storage.
